@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:homwork/page/home.dart';
 
-class Server_auth extends ChangeNotifier {
+class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User? theUser = FirebaseAuth.instance.currentUser;
@@ -16,7 +16,7 @@ class Server_auth extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<UserCredential> register_sytelm(String email, String password) async {
+  Future<UserCredential> register_system(String email, String password) async {
     UserCredential register = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
     final User? user = register.user;

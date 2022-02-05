@@ -1,18 +1,18 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, unnecessary_new
 
 import 'package:flutter/material.dart';
-import 'package:homwork/server/server_auth.dart';
+import 'package:homwork/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-class Login_system extends StatefulWidget {
-  const Login_system({Key? key}) : super(key: key);
+class LoginScreenView extends StatefulWidget {
+  const LoginScreenView({Key? key}) : super(key: key);
 
   @override
-  _Login_systemState createState() => _Login_systemState();
+  _LoginScreenViewState createState() => _LoginScreenViewState();
 }
 
-class _Login_systemState extends State<Login_system> {
-  Server_auth _server_auth = Server_auth();
+class _LoginScreenViewState extends State<LoginScreenView> {
+  AuthService _AuthService = AuthService();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -84,7 +84,7 @@ class _Login_systemState extends State<Login_system> {
                     });
                     email = email.trim(); //remove spaces
                     email = email.toLowerCase();
-                    await Provider.of<Server_auth>(context, listen: false)
+                    await Provider.of<AuthService>(context, listen: false)
                         .login_sytelm(email, password);
                     Navigator.pushNamed(context, '/dashbord');
                     }

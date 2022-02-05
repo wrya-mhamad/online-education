@@ -2,8 +2,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:homwork/page/dashbord.dart';
 import 'package:homwork/page/home.dart';
-import 'package:homwork/page/login_sysytem.dart';
-import 'package:homwork/page/register_system.dart';
+import 'package:homwork/page/login_screen.dart';
+import 'package:homwork/page/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class Index extends StatefulWidget {
@@ -27,9 +27,9 @@ class _IndexState extends State<Index> {
           )),
       initialRoute: '/',
       routes: {
-        '/': (context) => Home_page(),
-        '/login': (context) => Login_system(),
-        '/register': (context) => Register_system(),
+        '/': (context) => HomePage(),
+        '/login': (context) => LoginScreenView(),
+        '/register': (context) => RegisterScreenView(),
         '/dashbord': (context) => Dashbord(),
       },
     );

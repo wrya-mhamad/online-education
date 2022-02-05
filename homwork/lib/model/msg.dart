@@ -1,18 +1,18 @@
 class MSG {
-  String? messnger;
-  MSG({this.messnger});
+  String? message;
+  MSG({this.message});
 
 
 factory MSG.fromMap(map) {
     return MSG(
-      messnger: map['messnger'],
+      message: map['message'],
      
     );
   }
 
 Map<String, dynamic> toMap() {
     return {
-'messnger' :messnger    
+'message' :message    
     };
   }
 
