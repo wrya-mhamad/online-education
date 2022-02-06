@@ -4,19 +4,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-import 'package:homwork/server/server_auth.dart';
+import 'package:homwork/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 import '../model/user_model.dart';
 
-class Register_system extends StatefulWidget {
-  const Register_system({Key? key}) : super(key: key);
+class RegisterScreenView extends StatefulWidget {
+  const RegisterScreenView({Key? key}) : super(key: key);
 
   @override
-  _Register_systemState createState() => _Register_systemState();
+  _RegisterScreenViewState createState() => _RegisterScreenViewState();
 }
 
-class _Register_systemState extends State<Register_system> {
+class _RegisterScreenViewState extends State<RegisterScreenView> {
   final _auth = FirebaseAuth.instance;
 
   TextEditingController _email = TextEditingController();
@@ -27,7 +27,7 @@ class _Register_systemState extends State<Register_system> {
   bool isChecked = false;
   String email = "";
   String password = "";
-  Server_auth _server_auth = Server_auth();
+  AuthService _AuthService = AuthService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _Register_systemState extends State<Register_system> {
             children: [
               Center(
                 child: Text(
-                  "SING UP ",
+                  "Sign up ",
                   style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
@@ -53,20 +53,20 @@ class _Register_systemState extends State<Register_system> {
               Row(
                 children: [
                   Flexible(
-                    child: testField("First Name", _firstName, false,
+                    child: customTextField("First Name", _firstName, false,
                         RegExp(r'^.{3,}$'), "name(Min. 3 Character)", 0),
                   ),
                   Flexible(
-                    child: testField("Last Name", _lastName, false,
+                    child: customTextField("Last Name", _lastName, false,
                         RegExp(r'^.{3,}$'), "name(Min. 3 Character)", 0),
                   )
                 ],
               ),
-              testField("Email", _email, false,
+              customTextField("Email", _email, false,
                   RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]"), "email", 0),
-              testField("Password", _password, true, RegExp(r'^.{6,}$'),
+              customTextField("Password", _password, true, RegExp(r'^.{6,}$'),
                   "Password(Min. 6 Character)", 0),
-              testField("Confirm Password", _Confirm_Password, true,
+              customTextField("Confirm Password", _Confirm_Password, true,
                   RegExp(r'^.{6,}$'), "Password(Min. 6 Character)", 1),
               SizedBox(
                 height: 20,
@@ -80,8 +80,8 @@ class _Register_systemState extends State<Register_system> {
                       });
                       email = email.trim(); //remove spaces
                       email = email.toLowerCase();
-                      await Provider.of<Server_auth>(context, listen: false)
-                          .register_sytelm(email, password)
+                      await Provider.of<AuthService>(context, listen: false)
+                          .register_system(email, password)
                           .then((value) {
                         postDetailsToFirestore();
                       });
@@ -163,7 +163,7 @@ class _Register_systemState extends State<Register_system> {
     );
   }
 
-  Padding testField(String name, TextEditingController _controller, bool _obs,
+  Padding customTextField(String name, TextEditingController _controller, bool _obs,
       RegExp regex, String validate, int conferm) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
@@ -217,7 +217,7 @@ class _Register_systemState extends State<Register_system> {
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.firstName = _firstName.text;
-    userModel.secondName = _lastName.text;
+    userModel.lastName = _lastName.text;
 
     await firebaseFirestore
         .collection("users")

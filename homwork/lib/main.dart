@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:homwork/home/index.dart';
 import 'package:homwork/model/msg.dart';
-import 'package:homwork/server/server_auth.dart';
+import 'package:homwork/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -17,7 +17,7 @@ void main() async {
  MultiProvider(
    child: Index(),
  providers: [
-        ChangeNotifierProvider(create: (context) => Server_auth())
+        ChangeNotifierProvider(create: (context) => AuthService())
 
  ],
 

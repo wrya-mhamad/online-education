@@ -7,7 +7,7 @@ import 'package:homwork/page/home.dart';
 import 'package:provider/provider.dart';
 
 import '../model/user_model.dart';
-import '../server/server_auth.dart';
+import '../services/auth_service.dart';
 
 class Dashbord extends StatefulWidget {
   const Dashbord({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ User? user = FirebaseAuth.instance.currentUser;
         actions: [
           IconButton(
               onPressed: () async {
-                await Provider.of<Server_auth>(context, listen: false)
+                await Provider.of<AuthService>(context, listen: false)
                     .logout_system();
                         Navigator.pushNamed(context, '/');
                
@@ -69,11 +69,11 @@ User? user = FirebaseAuth.instance.currentUser;
       body: Center(
         child: Column(
           children: [
-            Text(Provider.of<Server_auth>(context, listen: true).theUser !=
+            Text(Provider.of<AuthService>(context, listen: true).theUser !=
                     null
-                ? Provider.of<Server_auth>(context, listen: true).theUser!.email!
+                ? Provider.of<AuthService>(context, listen: true).theUser!.email!
                 : 'no user'),
-                Text("your name is ${loggedInUser.firstName} ${loggedInUser.secondName}"),
+                Text("your name is ${loggedInUser.firstName} ${loggedInUser.lastName}"),
               Text("your name is "),
           ],
         ),

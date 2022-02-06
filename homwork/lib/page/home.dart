@@ -4,22 +4,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:homwork/page/dashbord.dart';
-import 'package:homwork/server/server_auth.dart';
+import 'package:homwork/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-class Home_page extends StatefulWidget {
-  const Home_page({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _Home_pageState createState() => _Home_pageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _Home_pageState extends State<Home_page> {
+class _HomePageState extends State<HomePage> {
 
 
   @override
   Widget build(BuildContext context) {
-    User? user = Provider.of<Server_auth>(context, listen: true).theUser;
+    User? user = Provider.of<AuthService>(context, listen: true).theUser;
   return user != null ?Dashbord():
     Scaffold(
       
